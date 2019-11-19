@@ -1,3 +1,9 @@
+
+
+.choosePlayer {
+  text-align: center;
+}
+
 #cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -11,7 +17,22 @@
     margin-top: 15px;
     &:hover {
       cursor: pointer;
-      
+      transform: scale(1.1);
+
     }
+  }
+}
+
+
+#startGame {
+  width: 200px;
+  margin: 0 auto;
+  background-color: green;
+  margin-top: 30px;
+  font-size: 40px;
+  padding: 20px;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
   }
 }
