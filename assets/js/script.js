@@ -10,14 +10,17 @@ for (let i = 0; i < characters.length; i++) {
 	fetch(url)
 		.then(result => result.json())
 		.then((res) => {
-			createCard(res);
+			createCards(res);
 		})
 		.catch(err => console.log(err));
 }
 
 var i = 0;
 
-function createCard(result){
+
+
+
+function createCards(result){
   console.log(result);
 
   var cardContainer = document.getElementById('cards');
@@ -47,5 +50,25 @@ card.appendChild(familyicon);
   gender.innerHTML = result.gender;
   card.appendChild(gender);
 
+	card.addEventListener('click', function(){
+	  if (localStorage.player1 && localStorage.player2){
+			localStorage.clear();
+			localStorage.player1 = result.name;
+		} else if (localStorage.player1){
+			localStorage.player2 = result.name;
+		} else {
+			localStorage.player1 = result.name;
+		}
+
+
+
+
+	});
+
+
 
 } //closing createcard function
+
+
+
+//lage event listener for å legge til player i local storage
