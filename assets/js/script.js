@@ -2,7 +2,7 @@
 
 
 const api = 'https://anapioficeandfire.com/api/characters/';
-const characters = [339, 640, 1303, 333, 238, 572, 692, 836, 1442, 503];
+const characters = [339, 302, 1303, 333, 232, 572, 552, 333, 444, 503];
 
 for (let i = 0; i < characters.length; i++) {
 	let url = api + characters[i];
@@ -50,6 +50,9 @@ card.appendChild(familyicon);
   gender.innerHTML = result.gender;
   card.appendChild(gender);
 
+
+
+//lage event listener for å legge til player i local storage
 	card.addEventListener('click', function(){
 	  if (localStorage.player1 && localStorage.player2){
 			localStorage.clear();
@@ -69,6 +72,11 @@ card.appendChild(familyicon);
 
 } //closing createcard function
 
+//lage en event listener for å starte gamet
+const startGame = document.getElementById('startGame');
 
-
-//lage event listener for å legge til player i local storage
+startGame.addEventListener('click', function(){
+	if(localStorage.player1 && localStorage.player2){
+		startGame.href = 'game.html';
+	}
+});

@@ -20,7 +20,7 @@
   transform: scale(1.1);
 }
 
-#startGame {
+#myGame {
   width: 200px;
   margin: 0 auto;
   background-color: green;
@@ -28,9 +28,20 @@
   font-size: 40px;
   padding: 20px;
 }
-#startGame:hover {
+#myGame:hover {
   cursor: pointer;
   transform: scale(1.1);
+}
+
+body {
+  width: 100%;
+}
+
+canvas {
+  border: 1px solid black;
+  width: 1000;
+  height: 600px;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=style.css.map */
