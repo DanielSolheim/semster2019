@@ -8,7 +8,30 @@
   <title>The game</title>
 </head>
 <body id="game">
-  <canvas id="myCanvas" width="400" height="400"></canvas>
+  <canvas id="myCanvas" width="480" height="400">
+
+    Please update your browser to play this game
+  </canvas>
+
+
+
+
+
+   <div  class="dice" id="dice1">
+     <div class="showDice" id="displayDice"></div>
+     <button id="rollDice" onclick="rollDice1()">Roll Dice</button>
+   </div>
+
+
+   <div class="dice" id="dice2">
+     <div class="showDice" id="displayDice2"></div>
+     <button id="rollDice2" onclick="rollDice2()">Roll Dice 2</button>
+   </div>
+
+
+   <img src="assets/bilder/players/dani.svg" alt="" width="500" height="500">
+
+
 
   <script src="assets/js/game.js"></script>
 </body>

@@ -2,7 +2,8 @@
 
 
 const api = 'https://anapioficeandfire.com/api/characters/';
-const characters = [339, 302, 1303, 333, 232, 572, 552, 333, 444, 503];
+const characters = [339, 583, 1303, 1052, 2024, 572, 552, 333, 444, 16];
+/* Eddard stark(339), Jon snow(583), daenerys(1303), Tyrion Lanister( 1052), Tormund Giantsbane (2024) */
 
 for (let i = 0; i < characters.length; i++) {
 	let url = api + characters[i];
@@ -36,13 +37,17 @@ function createCards(result){
   name.innerHTML = '<b>'  + result.name + '<b>' ;
 
 let familyicon = document.createElement('img');
-let iconSrc = 'assets/bilder/icons/skjold';
+let iconSrc = 'assets/bilder/players/';
 card.appendChild(familyicon);
 
 
 
 // flere if statements kommer her senere
-  if (result.name === 'Eddard Stark') { card.style.backgroundColor = 'green';  /* familyicon.src = iconSrc + i + '.svg'; */   }
+  if (result.name === 'Eddard Stark') { card.style.backgroundColor = 'white';   familyicon.src = iconSrc + 'player6-01.svg';  };
+	if (result.name === "Daenerys Targaryen") { card.style.backgroundColor = 'white';   familyicon.src = iconSrc + 'player7-01.svg';  };
+	if (result.name === "Jon Snow") { card.style.backgroundColor = 'white';   familyicon.src = iconSrc + 'snow3-01.svg';  };
+	if (result.name === "Tyrion Lannister") { card.style.backgroundColor = 'white';   familyicon.src = iconSrc + 'tyrion-01.svg';  };
+
 
 
 
@@ -78,5 +83,7 @@ const startGame = document.getElementById('startGame');
 startGame.addEventListener('click', function(){
 	if(localStorage.player1 && localStorage.player2){
 		startGame.href = 'game.html';
+	} else {
+		alert("Choose players")
 	}
 });

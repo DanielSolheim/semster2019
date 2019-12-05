@@ -6,3 +6,21 @@ canvas {
   border: 1px solid black;
   margin: 0 auto;
 }
+
+
+
+
+#dice {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-color: red;
+  margin-top: 500px;
+}
+
+
+.showDice {
+  background-color: red;
+  width: 100px;
+  height: 200px;
+}
