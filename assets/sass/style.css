@@ -6,12 +6,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: 80%;
-  background-color: red;
+  background-color: orange;
   margin: 0 auto;
 }
 #cards .card {
   width: 80%;
-  background-color: blue;
+  background-color: white;
   margin: 0 auto;
   margin-top: 15px;
 }

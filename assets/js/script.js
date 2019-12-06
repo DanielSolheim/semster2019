@@ -2,8 +2,8 @@
 
 
 const api = 'https://anapioficeandfire.com/api/characters/';
-const characters = [339, 583, 1303, 1052, 2024, 572, 552, 333, 444, 16];
-/* Eddard stark(339), Jon snow(583), daenerys(1303), Tyrion Lanister( 1052), Tormund Giantsbane (2024) */
+const characters = [339, 583, 1303, 1052, 2024, 565, 148, 16, 339, 16];
+/* Eddard stark(339), Jon snow(583), daenerys(1303), Tyrion Lanister( 1052), Tormund Giantsbane (2024), Joffrey (565), Arya Stark(148), Margarye tyrell (16), mace tyrell (691) */
 
 for (let i = 0; i < characters.length; i++) {
 	let url = api + characters[i];
@@ -43,16 +43,22 @@ card.appendChild(familyicon);
 
 
 // flere if statements kommer her senere
-  if (result.name === 'Eddard Stark') { card.style.backgroundColor = 'white';   familyicon.src = iconSrc + 'player6-01.svg';  };
-	if (result.name === "Daenerys Targaryen") { card.style.backgroundColor = 'white';   familyicon.src = iconSrc + 'player7-01.svg';  };
-	if (result.name === "Jon Snow") { card.style.backgroundColor = 'white';   familyicon.src = iconSrc + 'snow3-01.svg';  };
-	if (result.name === "Tyrion Lannister") { card.style.backgroundColor = 'white';   familyicon.src = iconSrc + 'tyrion-01.svg';  };
-
+  if (result.name === 'Eddard Stark')       {familyicon.src = iconSrc + 'player6-01.svg';  };
+	if (result.name === "Daenerys Targaryen") {familyicon.src = iconSrc + 'player7-01.svg';  };
+	if (result.name === "Jon Snow")           {familyicon.src = iconSrc + 'snow3-01.svg';  };
+	if (result.name === "Tyrion Lannister")   {familyicon.src = iconSrc + 'tyrion-01.svg';  };
+  if (result.name === "Tormund")            {familyicon.src = iconSrc + 'tormund-01.svg';  };
+	if (result.name === "Joffrey Baratheon")  {familyicon.src = iconSrc + 'joffrey-01.svg';  };
+	if (result.name === "Arya Stark")         {familyicon.src = iconSrc + 'arya-01.svg';  };
+	if (result.name === "Margaery Tyrell")    {familyicon.src = iconSrc + 'mary2-01.svg';  };
 
 
 
   let gender = document.createElement('p');
-  gender.innerHTML = result.gender;
+  gender.innerHTML = result.culture;
+	if (result. culture === ""){
+		gender.innerHTML = "Unknown";
+	}
   card.appendChild(gender);
 
 
