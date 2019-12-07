@@ -1,38 +1,92 @@
 
 
+
+
+#choosePlayersPage {
+  background-image: url("../bilder/castle.jpg");
+  overflow-x: hidden;
+}
+
+
+
+
+
+
 .choosePlayer {
   text-align: center;
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  margin-top: 0px;
+  font-family: $main-font;
 }
 
 #cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: 80%;
- background-color: orange; 
   margin:  0 auto;
   .card {
     width: 80%;
-   background-color: white;
+    background-color: rgba(255,255,255, 0.85);
     margin: 0 auto;
     margin-top: 15px;
+    font-family: $main-font;
+    text-align: center;
+    position: relative;
     &:hover {
       cursor: pointer;
       transform: scale(1.1);
+      background-color: rgba(255,255,255, 1)
 
     }
+    .name {
+      background-color: black;
+      color: white;
+      padding: 10px 0 ;
+      margin-top: 0;
+    }
+
   }
 }
 
 
 #myGame {
-  width: 200px;
+  width: 74.5%;
   margin: 0 auto;
-  background-color: green;
+  font-family: $main-font;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border: 5px solid white;
+
   margin-top: 30px;
+  margin-bottom: 200px;
   font-size: 40px;
   padding: 20px;
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
   }
+}
+
+
+
+// Make the banners
+.banner {
+  position: absolute;
+  padding: 20px 0;
+  width: 100%;
+  bottom: 50px;
+
+}
+
+
+.banner1 {
+  background-color: red;
+}
+
+.banner2 {
+  background-color: blue;
 }

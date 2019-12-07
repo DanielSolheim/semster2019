@@ -131,6 +131,12 @@ var tileWidth = 80;
 var tileHeight = 80;
 var tileCount = 0;
 
+
+
+
+
+/* ----- Original Tile drawing with for loop. going to do it with a background instead */
+/*
 // draw the tiles in a double for loop
 for (var column = 0; column <= 5; column++){
   for(var row = 0; row <= 5; row++){
@@ -143,7 +149,7 @@ for (var column = 0; column <= 5; column++){
     ctx.fillText( tileCount - 5, row*tileWidth, column*tileHeight);
     tileCount++;
   }
-}
+} */
 
 
 // alert function  for wrong player

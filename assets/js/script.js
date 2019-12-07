@@ -16,10 +16,10 @@ for (let i = 0; i < characters.length; i++) {
 		.catch(err => console.log(err));
 }
 
+
+
+
 var i = 0;
-
-
-
 
 function createCards(result){
   console.log(result);
@@ -67,21 +67,60 @@ card.appendChild(familyicon);
 	card.addEventListener('click', function(){
 	  if (localStorage.player1 && localStorage.player2){
 			localStorage.clear();
+			reset(); 
+
 			localStorage.player1 = result.name;
+			card.style.transform = 'scale(1.1)';
+		  banner1();
+
 		} else if (localStorage.player1){
 			localStorage.player2 = result.name;
+			card.style.transform = 'scale(1.1)';
+			banner2();
 		} else {
 			localStorage.player1 = result.name;
+      card.style.transform = 'scale(1.1)';
+			banner1();
 		}
 
-
-
-
 	});
+
+	function  banner1() {
+		let banner = document.createElement('div');
+		banner.innerHTML = "Player1";
+		banner.classList.add('banner');
+		banner.classList.add('banner1');
+		card.appendChild(banner);
+	}
+
+	function  banner2() {
+		let banner = document.createElement('div');
+		banner.innerHTML = "Player2";
+		banner.classList.add('banner');
+		banner.classList.add('banner2');
+		card.appendChild(banner);
+	}
+
+
+
+	function reset() {
+	document.querySelectorAll(".banner").forEach(function (elem) {
+		elem.remove();
+	});
+	document.querySelectorAll(".banner").forEach(function (elem) {
+		elem.remove();
+	});
+
+	document.querySelectorAll(".shield").forEach(function (elem) {
+		elem.style.transform = 'scale(1)';
+	});
+}
+
 
 
 
 } //closing createcard function
+
 
 //lage en event listener for å starte gamet
 const startGame = document.getElementById('startGame');
