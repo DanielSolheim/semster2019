@@ -110,13 +110,22 @@ function p1CurrentPos(){
   ctx.fillStyle = "black";
   ctx.arc(myPlayer1.positionX + 10, myPlayer1.positionY + 10, 20, 0, Math.PI * 2);
   ctx.fill();
+
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = "orange";
+  ctx.stroke();
+
 }
 
 function p2CurrentPos(){
   ctx.beginPath();
-  ctx.fillStyle = "red";
+  ctx.fillStyle = "purple";
   ctx.arc(myPlayer2.positionX - 10, myPlayer2.positionY - 10, 20, 0, Math.PI * 2);
   ctx.fill();
+
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = "black";
+  ctx.stroke();
 }
 
 
@@ -128,6 +137,10 @@ function drawPlayer1(){
   ctx.arc(myPlayer1.positionX + 10, myPlayer1.positionY + 10, 20, 0, Math.PI * 2);
   ctx.fill();
 
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = "orange";
+  ctx.stroke();
+
 
 }
 
@@ -136,9 +149,13 @@ function drawPlayer1(){
 function drawPlayer2(){
   ctx.clearRect(0, 0, myCanvas.width,myCanvas.height);
   ctx.beginPath();
-  ctx.fillStyle = "red";
+  ctx.fillStyle = "purple";
   ctx.arc(myPlayer2.positionX - 10, myPlayer2.positionY - 10, 20, 0, Math.PI * 2);
   ctx.fill();
+
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = "black";
+  ctx.stroke();
 
 
 }
@@ -235,17 +252,19 @@ if (player2 === "Margaery Tyrell")    {playerImage2.src = iconSrces + 'mary2-01.
 
 
    // denne utføres når noen går på en felle
-   function showMessage(player, message){
+   function showMessage(player, message, color){
      overlay.style.display = 'block';
      overlayP.innerHTML = player + message;
-
+     overlay.style.backgroundColor  =   color;
    }
 
 
 
 
 
-
+   var displayDice = document.getElementById('displayDice'); // henter displaydice
+   var diceImg = document.createElement('img');   //lager et img element
+   displayDice.appendChild(diceImg);   // setter img elementet til child av display childe
 
 // player1 -------------------------------------
 function rollDice1(){
@@ -271,9 +290,11 @@ function rollDice1(){
 
 
        ////////////////////////Lager terning animasjon
-        var displayDice = document.getElementById('displayDice');
-        var diceImg = document.createElement('img');
-        displayDice.appendChild(diceImg);
+
+
+       displayDice.removeChild(diceImg);
+       var diceImage = document.createElement('img');
+       displayDice.appendChild(diceImg);
 
         diceSrc = "assets/bilder/dice/";
 
@@ -292,7 +313,7 @@ function rollDice1(){
       /* traps (de må komme før man endrer verdien), muligens bruke switch for å gjøre det mer oversiktlig */
       setTimeout(function(){
          if(player1verdi === 4){
-           showMessage(player1, " got shot 3 steps babck");
+           showMessage(player1, " got shot 3 steps babck", "black");
 
            setTimeout(function(){
              overlay.style.display = 'none';
@@ -304,7 +325,7 @@ function rollDice1(){
 
 
       if (player1verdi === 7){
-        showMessage(player1, " got a kick in the ass 4 steps forward");
+        showMessage(player1, " got a kick in the ass 4 steps forward", "black");
 
         setTimeout(function(){
           overlay.style.display = 'none';
@@ -313,7 +334,7 @@ function rollDice1(){
       }
 
       if (player1verdi === 15){
-        showMessage(player1, " crap, hit a trap");
+        showMessage(player1, " crap, hit a trap", "black");
 
         setTimeout(function(){
           overlay.style.display = 'none';
@@ -323,7 +344,7 @@ function rollDice1(){
 
 
       if (player1verdi === 19){
-        showMessage(player1, " oh no");
+        showMessage(player1, " oh no", "black");
 
         setTimeout(function(){
           overlay.style.display = 'none';
@@ -333,7 +354,7 @@ function rollDice1(){
 
 
       if (player1verdi === 28){
-        showMessage('fuck', " al the way back");
+        showMessage('fuck', " al the way back", "black");
 
         setTimeout(function(){
           overlay.style.display = 'none';
@@ -360,9 +381,14 @@ function rollDice1(){
        setTimeout(function(){
           if(rollp1 === 6){
              currentPlayerTurn--;
-             alert("roll again");
+             showMessage(player1, "rolled a 6, roll one more time", "black")
+             setTimeout(function(){
+               overlay.style.display = "none";
+             }, 2000)
            }
         },700);
+
+
 
 
 
@@ -397,8 +423,12 @@ function rollDice1(){
 
 
 
+   var showScore1 = document.getElementById('showScore1');
 
+   setTimeout(function(){
+   showScore1.innerHTML = player1verdi;
 
+},1100)
 
 
 
@@ -429,7 +459,10 @@ setTimeout(function(){
 
 
 
-
+////////////////////////Lager terning animasjon
+var displayDice2 = document.getElementById('displayDice2');
+var diceImg2 = document.createElement('img');
+displayDice2.appendChild(diceImg2);
 
 
 
@@ -449,64 +482,93 @@ function rollDice2(){
   player2verdi = player2verdi + rollp2;
 
 
+  displayDice2.removeChild(diceImg2);
+  diceImg2 = document.createElement('img');
+  displayDice2.appendChild(diceImg2);
 
-    ////////////////////////Lager terning animasjon
-    var displayDice = document.getElementById('displayDice2');
-    var diceImg = document.createElement('img');
-    displayDice.appendChild(diceImg);
+
 
     diceSrc = "assets/bilder/dice/";
 
 
     if(rollp2){
-       setTimeout(function () { diceImg.src = diceSrc + '2.svg'; }, 100);
-       setTimeout(function () { diceImg.src = diceSrc + '4.svg'; }, 200);
-       setTimeout(function () { diceImg.src = diceSrc + '1.svg'; }, 300);
-       setTimeout(function () { diceImg.src = diceSrc + '6.svg'; }, 400);
-       setTimeout(function () { diceImg.src = diceSrc + rollp2 + '.svg'; }, 500);
+       setTimeout(function () { diceImg2.src = diceSrc + '2.svg'; }, 100);
+       setTimeout(function () { diceImg2.src = diceSrc + '4.svg'; }, 200);
+       setTimeout(function () { diceImg2.src = diceSrc + '1.svg'; }, 300);
+       setTimeout(function () { diceImg2.src = diceSrc + '6.svg'; }, 400);
+       setTimeout(function () { diceImg2.src = diceSrc + rollp2 + '.svg'; }, 500);
       }
 
 
       /* traps (de må komme før man endrer verdien), muligens bruke switch for å gjøre det mer oversiktlig */
       setTimeout(function(){
          if(player2verdi === 4){
-           alert("trap, move 3 steps  back");
+           showMessage(player2, " got shot 3 steps babck", "purple");
+
+           setTimeout(function(){
+             overlay.style.display = 'none';
+           }, 3500)
+
            player2verdi -= 3;
+
         }
 
 
       if (player2verdi === 7){
-        alert("Yay, you get 4 extra moves")
+        showMessage(player2, " got a kick in the ass 4 steps forward", "purple");
+
+        setTimeout(function(){
+          overlay.style.display = 'none';
+        }, 3500)
         player2verdi += 4;
       }
 
       if (player2verdi === 15){
-        alert ("crap, you hit a trap, go back 4 places");
+        showMessage(player2, " crap, hit a trap", "purple");
+
+        setTimeout(function(){
+          overlay.style.display = 'none';
+        }, 3500)
         player2verdi -= 4;
       }
 
 
       if (player2verdi === 19){
-        alert ("crap, go back 4 places");
+        showMessage(player2, " oh no", "purple");
+
+        setTimeout(function(){
+          overlay.style.display = 'none';
+        }, 3500)
         player2verdi -= 2;
       }
 
 
       if (player2verdi === 28){
-        alert("oh no, so close, go back to the start");
+        showMessage('fuck', " al the way back", "purple");
+
+        setTimeout(function(){
+          overlay.style.display = 'none';
+        }, 3500)
         player2verdi -= 28;
       }
 
     }, 600)
 
-
      currentPlayerTurn--;
 
 
+
+
+     // hvis spilleren får 6
      setTimeout(function(){
         if(rollp2 === 6){
            currentPlayerTurn++;
-           alert("roll again");
+           showMessage(player2, "rolled a 6, roll one more time", "purple")
+
+           setTimeout(function(){
+             overlay.style.display = 'none';
+           }, 2000)
+
          }
       },700);
 
@@ -548,12 +610,20 @@ function rollDice2(){
      }, 1300);
 
 
-setTimeout(function(){
- window.requestAnimationFrame(drawPlayer2);
-  window.requestAnimationFrame(p1CurrentPos);
+
+     var showScore2 = document.getElementById('showScore2');
+
+     setTimeout(function(){
+     showScore2.innerHTML = player2verdi;
+
+  },1100)
+
+    setTimeout(function(){
+      window.requestAnimationFrame(drawPlayer2);
+      window.requestAnimationFrame(p1CurrentPos);
 
 
-}, 1000)
+    }, 1000)
 
 
 
