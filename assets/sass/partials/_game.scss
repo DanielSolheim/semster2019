@@ -1,5 +1,6 @@
 #game {
   width: 100%;
+  background-color: black;
 }
 
 
@@ -8,8 +9,10 @@
 .container {
   display: grid;
   grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 166.66px 166.66px 166.66px;
+  margin:  auto 4%;
   margin-top: 100px;
+
 }
 
 
@@ -24,9 +27,39 @@ canvas {
 
 
 
+#player1Container {
+  grid-column: 1/3;
+  grid-row: 1/4;
+  padding: 10px;
+  width: 150px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  border: 5px solid black;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#player2Container {
+  grid-column: 7/9;
+  grid-row: 1/4;
+  width: 150px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  border: 5px solid black;
+  border-radius: 10px;
+  background-color: white;
+}
+
+
+
+
 
 .dice {
   margin: 0 auto;
+  grid-column: 1/3;
+  grid-row: 2/3;
   button {
     width: 100%;
     border: none;
@@ -52,16 +85,9 @@ canvas {
 }
 
 
-#dice1 {
-  grid-column: 1/3;
-  grid-row: 2/3;
-}
 
 
-#dice2 {
-  grid-column: 6/8;
-  grid-row: 2/3;
-}
+
 
 
 
@@ -72,12 +98,12 @@ canvas {
 }
 
 .playerImage2 {
-  grid-column: 6/8;
+  grid-column: 1/3;
   grid-row: 1/2;
 }
 
 .playerImage {
-  width: 40%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -109,7 +135,7 @@ canvas {
 // score count and color check for players
 
 #score1 {
-  grid-column: 1/2;
+  grid-column: 2/3;
   grid-row: 3/4;
   text-align: right;
   margin-right: 20px;
@@ -118,7 +144,7 @@ canvas {
 
 
 #score2 {
-  grid-column: 6/7;
+  grid-column: 1/2;
   grid-row: 3/4;
   text-align: right;
   margin-right: 20px;
@@ -131,8 +157,8 @@ canvas {
 }
 
 .color1 {
-  grid-column: 2/3; ;
-  grid-row: 3/4;
+  grid-column: 1/2; ;
+  grid-row: 2/3;
   margin-left: 20px;
 }
 

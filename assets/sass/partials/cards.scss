@@ -60,9 +60,8 @@
   background-color: black;
   color: white;
   border: 5px solid white;
-
   margin-top: 30px;
-  margin-bottom: 200px;
+  margin-bottom: 30px;
   font-size: 40px;
   padding: 20px;
   &:hover {
@@ -76,17 +75,20 @@
 // Make the banners
 .banner {
   position: absolute;
-  padding: 20px 0;
+  padding: 12px 0;
   width: 100%;
-  bottom: 50px;
+  bottom: 20px;
+  transform: rotate(-7deg);
+  font-family: $main-font;
+  font-size: 25px;
 
 }
 
 
 .banner1 {
-  background-color: red;
+  background-color: orange;
 }
 
 .banner2 {
-  background-color: blue;
+  background-color: purple;
 }

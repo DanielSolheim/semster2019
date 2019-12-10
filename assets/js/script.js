@@ -2,8 +2,8 @@
 
 
 const api = 'https://anapioficeandfire.com/api/characters/';
-const characters = [339, 583, 1303, 1052, 2024, 565, 148, 16, 339, 16];
-/* Eddard stark(339), Jon snow(583), daenerys(1303), Tyrion Lanister( 1052), Tormund Giantsbane (2024), Joffrey (565), Arya Stark(148), Margarye tyrell (16), mace tyrell (691) */
+const characters = [339, 583, 1303, 1052, 2024, 565, 148, 16, 849, 216];
+/* Eddard stark(339), Jon snow(583), daenerys(1303), Tyrion Lanister( 1052), Tormund Giantsbane (2024), Joffrey (565), Arya Stark(148), Margarye tyrell (16), ramsay snow(849), Brienne of Tarth(216) */
 
 for (let i = 0; i < characters.length; i++) {
 	let url = api + characters[i];
@@ -51,6 +51,8 @@ card.appendChild(familyicon);
 	if (result.name === "Joffrey Baratheon")  {familyicon.src = iconSrc + 'joffrey-01.svg';  };
 	if (result.name === "Arya Stark")         {familyicon.src = iconSrc + 'arya-01.svg';  };
 	if (result.name === "Margaery Tyrell")    {familyicon.src = iconSrc + 'mary2-01.svg';  };
+	if (result.name === "Ramsay Snow")        {familyicon.src = iconSrc + 'ramsay2-01.svg';  };
+	if (result.name === "Brienne of Tarth")        {familyicon.src = iconSrc + 'brienne-01.svg';  };
 
 
 
@@ -67,19 +69,19 @@ card.appendChild(familyicon);
 	card.addEventListener('click', function(){
 	  if (localStorage.player1 && localStorage.player2){
 			localStorage.clear();
-			reset(); 
+			reset();
 
 			localStorage.player1 = result.name;
-			card.style.transform = 'scale(1.1)';
+
 		  banner1();
 
 		} else if (localStorage.player1){
 			localStorage.player2 = result.name;
-			card.style.transform = 'scale(1.1)';
+		
 			banner2();
 		} else {
 			localStorage.player1 = result.name;
-      card.style.transform = 'scale(1.1)';
+
 			banner1();
 		}
 

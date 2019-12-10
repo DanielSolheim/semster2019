@@ -111,7 +111,7 @@ function p1CurrentPos(){
   ctx.arc(myPlayer1.positionX + 10, myPlayer1.positionY + 10, 20, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.lineWidth = 5;
+  ctx.lineWidth = 7;
   ctx.strokeStyle = "orange";
   ctx.stroke();
 
@@ -119,12 +119,12 @@ function p1CurrentPos(){
 
 function p2CurrentPos(){
   ctx.beginPath();
-  ctx.fillStyle = "purple";
+  ctx.fillStyle = "black";
   ctx.arc(myPlayer2.positionX - 10, myPlayer2.positionY - 10, 20, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = "black";
+  ctx.lineWidth = 7;
+  ctx.strokeStyle = "purple";
   ctx.stroke();
 }
 
@@ -137,7 +137,7 @@ function drawPlayer1(){
   ctx.arc(myPlayer1.positionX + 10, myPlayer1.positionY + 10, 20, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.lineWidth = 5;
+  ctx.lineWidth = 7;
   ctx.strokeStyle = "orange";
   ctx.stroke();
 
@@ -149,12 +149,12 @@ function drawPlayer1(){
 function drawPlayer2(){
   ctx.clearRect(0, 0, myCanvas.width,myCanvas.height);
   ctx.beginPath();
-  ctx.fillStyle = "purple";
+  ctx.fillStyle = "black";
   ctx.arc(myPlayer2.positionX - 10, myPlayer2.positionY - 10, 20, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = "black";
+  ctx.lineWidth = 7;
+  ctx.strokeStyle = "purple";
   ctx.stroke();
 
 
@@ -167,14 +167,14 @@ p2CurrentPos();
 
 
 
-
+var container = document.getElementById('mainContainer');
 
 //vi tegner spillerne på spillsiden;
-var container = document.getElementById('mainContainer');
+var player1Container = document.getElementById('player1Container');
 var playerImage1 = document.createElement('img');
 playerImage1.classList.add('playerImage1');
 playerImage1.classList.add('playerImage');
-container.appendChild(playerImage1);
+player1Container.appendChild(playerImage1);
 
 let iconSrces = 'assets/bilder/players/';
 
@@ -186,14 +186,17 @@ if (player1 === "Tormund")            {playerImage1.src = iconSrces + 'tormund-0
 if (player1 === "Joffrey Baratheon")  {playerImage1.src = iconSrces + 'joffrey-01.svg';  };
 if (player1 === "Arya Stark")         {playerImage1.src = iconSrces + 'arya-01.svg';  };
 if (player1 === "Margaery Tyrell")    {playerImage1.src = iconSrces + 'mary2-01.svg';  };
+if(player1 === "Ramsay Snow")         {playerImage1.src = iconSrces + 'ramsay2-01.svg'};
+if(player1 === "Brienne of Tarth")         {playerImage1.src = iconSrces + 'brienne-01.svg'};
 
 
 
 
+var player2Container = document.getElementById('player2Container');
 var playerImage2 = document.createElement('img');
 playerImage2.classList.add('playerImage2');
 playerImage2.classList.add('playerImage');
-container.appendChild(playerImage2);
+player2Container.appendChild(playerImage2);
 
 
 
@@ -205,6 +208,8 @@ if (player2 === "Tormund")            {playerImage2.src = iconSrces + 'tormund-0
 if (player2 === "Joffrey Baratheon")  {playerImage2.src = iconSrces + 'joffrey-01.svg';  };
 if (player2 === "Arya Stark")         {playerImage2.src = iconSrces + 'arya-01.svg';  };
 if (player2 === "Margaery Tyrell")    {playerImage2.src = iconSrces + 'mary2-01.svg';  };
+if(player2 === "Ramsay Snow")         {playerImage2.src = iconSrces + 'ramsay2-01.svg'};
+if(player2 === "Brienne of Tarth")         {playerImage1.src = iconSrces + 'brienne-01.svg'};
 
 
 
@@ -227,11 +232,12 @@ if (player2 === "Margaery Tyrell")    {playerImage2.src = iconSrces + 'mary2-01.
 
 
 
-   var dice1 = document.getElementById('dice1');
-   var dice2 = document.getElementById('dice2');
+   var dice1 = document.getElementById('rollDice');
+   var dice2 = document.getElementById('rollDice2');
+   var p1border = document.getElementById('player1Container');
+   var p2border = document.getElementById('player2Container');
 
 
-   var diceButton1 = document.getElementById('rollDice');
 
 
 
@@ -410,15 +416,19 @@ function rollDice1(){
 
           if(currentPlayerTurn === 0){
             dice2.style.backgroundColor = "grey";
-            dice1.style.backgroundColor = "white";
+            dice1.style.backgroundColor = "green";
+            p2border.style.border = "5px solid gray";
+            p1border.style.border = "5px solid green";
           }
 
 
           if(currentPlayerTurn === 1){
-            dice2.style.backgroundColor = "white";
+            dice2.style.backgroundColor = "green";
             dice1.style.backgroundColor = "gray";
+            p2border.style.border = "5px solid green";
+            p1border.style.border = "5px solid gray";
           }
-        }, 1300);
+        }, 1200);
 
 
 
@@ -598,14 +608,18 @@ function rollDice2(){
   setTimeout(function(){
 
        if(currentPlayerTurn === 0){
-         dice2.style.backgroundColor = "grey";
-         dice1.style.backgroundColor = "white";
+         dice2.style.backgroundColor = "gray";
+         dice1.style.backgroundColor = "green";
+         p2border.style.border = "5px solid gray";
+         p1border.style.border = "5px solid green";
        }
 
 
        if(currentPlayerTurn === 1){
-         dice2.style.backgroundColor = "white";
+         dice2.style.backgroundColor = "green";
          dice1.style.backgroundColor = "gray";
+         p2border.style.border = "5px solid green";
+         p1border.style.border = "5px solid gray";
        }
      }, 1300);
 
