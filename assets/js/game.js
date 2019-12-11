@@ -24,21 +24,21 @@ var ctx  = myCanvas.getContext('2d');
 var drawnPositions = {
   positions:[
     //row 1
-  {x: 50,  y: 50},
-  {x: 150, y: 50},
-  {x: 250, y: 50},
-  {x: 350, y: 50},
-  {x: 450, y: 50},
-  {x: 550, y: 50},
+  {x: 50,  y: 450},
+  {x: 150, y: 450},
+  {x: 250, y: 450},
+  {x: 350, y: 450},
+  {x: 450, y: 450},
+  {x: 550, y: 450},
 
 
   //row 2
-  {x: 50,  y: 150},
-  {x: 150, y: 150},
-  {x: 250, y: 150},
-  {x: 350, y: 150},
-  {x: 450, y: 150},
-  {x: 550, y: 150},
+  {x: 550,  y: 350},
+  {x: 450,  y: 350},
+  {x: 350,  y: 350},
+  {x: 250,  y: 350},
+  {x: 150,  y: 350},
+  {x: 50,   y: 350},
 
   //row 3
   {x: 50,  y: 250},
@@ -49,20 +49,20 @@ var drawnPositions = {
   {x: 550, y: 250},
 
   //row 4
-  {x: 50,  y: 350},
-  {x: 150, y: 350},
-  {x: 250, y: 350},
-  {x: 350, y: 350},
-  {x: 450, y: 350},
-  {x: 550, y: 350},
+  {x: 550,  y: 150},
+  {x: 450,  y: 150},
+  {x: 350,  y: 150},
+  {x: 250,  y: 150},
+  {x: 150,  y: 150},
+  {x: 50,   y: 150},
 
   //row 5
-  {x: 50,  y: 450},
-  {x: 150, y: 450},
-  {x: 250, y: 450},
-  {x: 350, y: 450},
-  {x: 450, y: 450},
-  {x: 550, y: 450}
+  {x: 50,  y: 50},
+  {x: 150, y: 50},
+  {x: 250, y: 50},
+  {x: 350, y: 50},
+  {x: 450, y: 50},
+  {x: 550, y: 50}
 
 ]
 
@@ -87,7 +87,7 @@ console.table(drawnPositions.positions);
   var myPlayer1  = {
     name: player1,
     positionX: 40,
-    positionY: 40
+    positionY: 450
   }
 
 
@@ -95,7 +95,7 @@ console.table(drawnPositions.positions);
   var myPlayer2  = {
     name: player2,
     positionX: 50,
-    positionY: 50
+    positionY: 450
   }
 
 
@@ -318,29 +318,48 @@ function rollDice1(){
 
       /* traps (de må komme før man endrer verdien), muligens bruke switch for å gjøre det mer oversiktlig */
       setTimeout(function(){
-         if(player1verdi === 4){
-           showMessage(player1, " got shot 3 steps babck", "black");
+
+
+        // door trap
+         if(player1verdi === 2){
+           showMessage(player1, " OPEN DOOR 7 steps forward ", "black");
 
            setTimeout(function(){
              overlay.style.display = 'none';
            }, 3500)
 
-           player1verdi -= 3;
+           player1verdi += 7;
 
         }
 
+        // door trap 2
+        if(player1verdi === 3){
+          showMessage(player1, " OPEN DOOR 6 steps forward ", "black");
 
-      if (player1verdi === 7){
-        showMessage(player1, " got a kick in the ass 4 steps forward", "black");
+          setTimeout(function(){
+            overlay.style.display = 'none';
+          }, 3500)
+
+          player1verdi += 6;
+
+       }
+
+
+
+       //Lava trap
+      if (player1verdi === 10){
+        showMessage(player1, " STEPPED IN LAVA, 9 BACK", "black");
 
         setTimeout(function(){
           overlay.style.display = 'none';
         }, 3500)
-        player1verdi += 4;
+        player1verdi -= 9;
       }
 
+
+      // Dragon trap
       if (player1verdi === 15){
-        showMessage(player1, " crap, hit a trap", "black");
+        showMessage(player1, " FUCK, A Dragon", "black");
 
         setTimeout(function(){
           overlay.style.display = 'none';
@@ -349,23 +368,23 @@ function rollDice1(){
       }
 
 
-      if (player1verdi === 19){
-        showMessage(player1, " oh no", "black");
+      if (player1verdi === 22){
+        showMessage(player1, " ELSA IS ANGRY, MOVE AWAY", "black");
 
         setTimeout(function(){
           overlay.style.display = 'none';
         }, 3500)
-        player1verdi -= 2;
+        player1verdi -= 9;
       }
 
 
       if (player1verdi === 28){
-        showMessage('fuck', " al the way back", "black");
+        showMessage(player1, " LADDER YOUR WAY DOWN", "black");
 
         setTimeout(function(){
           overlay.style.display = 'none';
         }, 3500)
-        player1verdi -= 28;
+        player1verdi -= 24;
       }
 
     }, 600)
@@ -436,7 +455,7 @@ function rollDice1(){
    var showScore1 = document.getElementById('showScore1');
 
    setTimeout(function(){
-   showScore1.innerHTML = player1verdi;
+   showScore1.innerHTML = player1verdi ;
 
 },1100)
 
@@ -512,29 +531,29 @@ function rollDice2(){
 
       /* traps (de må komme før man endrer verdien), muligens bruke switch for å gjøre det mer oversiktlig */
       setTimeout(function(){
-         if(player2verdi === 4){
-           showMessage(player2, " got shot 3 steps babck", "purple");
+         if(player2verdi === 2){
+           showMessage(player2, " OPEN DOOR", "purple");
 
            setTimeout(function(){
              overlay.style.display = 'none';
            }, 3500)
 
-           player2verdi -= 3;
+           player2verdi += 7;
 
         }
 
 
-      if (player2verdi === 7){
-        showMessage(player2, " got a kick in the ass 4 steps forward", "purple");
+      if (player2verdi === 10){
+        showMessage(player2, " CRAP LAVA", "purple");
 
         setTimeout(function(){
           overlay.style.display = 'none';
         }, 3500)
-        player2verdi += 4;
+        player2verdi -= 9;
       }
 
       if (player2verdi === 15){
-        showMessage(player2, " crap, hit a trap", "purple");
+        showMessage(player2, " DRAGON", "purple");
 
         setTimeout(function(){
           overlay.style.display = 'none';
@@ -543,23 +562,23 @@ function rollDice2(){
       }
 
 
-      if (player2verdi === 19){
-        showMessage(player2, " oh no", "purple");
+      if (player2verdi === 22){
+        showMessage(player2, " ELSA ANGRY", "purple");
 
         setTimeout(function(){
           overlay.style.display = 'none';
         }, 3500)
-        player2verdi -= 2;
+        player2verdi -= 9;
       }
 
 
       if (player2verdi === 28){
-        showMessage('fuck', " al the way back", "purple");
+        showMessage(player2, " DOWN THE LADDER", "purple");
 
         setTimeout(function(){
           overlay.style.display = 'none';
         }, 3500)
-        player2verdi -= 28;
+        player2verdi -= 24;
       }
 
     }, 600)

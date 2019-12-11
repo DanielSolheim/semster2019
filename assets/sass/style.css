@@ -83,7 +83,7 @@ body {
 
 #game {
   width: 100%;
-  background-color: black;
+  background-image: url("../bilder/ice.jpg");
 }
 
 .container {
@@ -99,7 +99,7 @@ canvas {
   grid-row: 1/4;
   border: 1px solid black;
   margin: 0 auto;
-  background-image: url("../bilder/board-simple.svg");
+  background-image: url("../bilder/ice-wall5-01.svg");
 }
 
 #player1Container {
@@ -110,7 +110,7 @@ canvas {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  border: 5px solid black;
+  border: 5px solid green;
   border-radius: 10px;
   background-color: white;
 }
@@ -122,7 +122,7 @@ canvas {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  border: 5px solid black;
+  border: 5px solid grey;
   border-radius: 10px;
   background-color: white;
 }
@@ -151,6 +151,14 @@ canvas {
   border-radius: 10px;
   width: 100px;
   height: 100px;
+}
+
+#rollDice {
+  background-color: green;
+}
+
+#rollDice2 {
+  background-color: gray;
 }
 
 .playerImage1 {
