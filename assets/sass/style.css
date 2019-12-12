@@ -4,7 +4,7 @@ body {
 }
 
 #choosePlayersPage {
-  background-image: url("../bilder/castle.jpg");
+  background-image: url("../bilder/ice2.jpg");
   overflow-x: hidden;
 }
 
@@ -83,14 +83,28 @@ body {
 
 #game {
   width: 100%;
-  background-image: url("../bilder/ice.jpg");
+  background-image: url("../bilder/ice2.jpg");
+  background-size: cover;
+}
+
+.headerText {
+  width: 100%;
+  background-color: black;
+  margin-top: -20px;
+  text-align: center;
+}
+.headerText h1 {
+  padding: 20px;
+  color: white;
+  font-size: 40px;
+  font-family: "Roboto", sans-serif;
 }
 
 .container {
   display: grid;
   grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
   grid-template-rows: 166.66px 166.66px 166.66px;
-  margin: auto 4%;
+  margin: auto 5%;
   margin-top: 100px;
 }
 
@@ -99,7 +113,7 @@ canvas {
   grid-row: 1/4;
   border: 1px solid black;
   margin: 0 auto;
-  background-image: url("../bilder/ice-wall5-01.svg");
+  background-image: url("../bilder/ice-wall8-01.svg");
 }
 
 #player1Container {
@@ -110,9 +124,10 @@ canvas {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  border: 5px solid green;
+  border: 8px solid #54CEC3;
   border-radius: 10px;
   background-color: white;
+  margin-left: 15px;
 }
 
 #player2Container {
@@ -122,9 +137,9 @@ canvas {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  border: 5px solid grey;
+  border: 8px solid grey;
   border-radius: 10px;
-  background-color: white;
+  background-color: grey;
 }
 
 .dice {
@@ -154,7 +169,7 @@ canvas {
 }
 
 #rollDice {
-  background-color: green;
+  background-color: #54CEC3;
 }
 
 #rollDice2 {
@@ -183,6 +198,18 @@ canvas {
   color: white;
   z-index: 2;
   animation: fadeIn ease 2s;
+}
+
+.overlayImg {
+  z-index: 3;
+  width: 100px;
+  float: right;
+}
+
+.overlayP {
+  font-size: 20px;
+  float: left;
+  font-family: "Roboto", sans-serif;
 }
 
 @keyframes fadeIn {
@@ -231,12 +258,12 @@ canvas {
   border-radius: 100px;
 }
 .showColor1 {
-  border: 5px solid orange;
+  border: 7px solid orange;
   background-color: black;
 }
 .showColor2 {
-  border: 5px solid black;
-  background-color: purple;
+  border: 7px solid purple;
+  background-color: black;
 }
 
 /*# sourceMappingURL=style.css.map */

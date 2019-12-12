@@ -209,7 +209,7 @@ if (player2 === "Joffrey Baratheon")  {playerImage2.src = iconSrces + 'joffrey-0
 if (player2 === "Arya Stark")         {playerImage2.src = iconSrces + 'arya-01.svg';  };
 if (player2 === "Margaery Tyrell")    {playerImage2.src = iconSrces + 'mary2-01.svg';  };
 if(player2 === "Ramsay Snow")         {playerImage2.src = iconSrces + 'ramsay2-01.svg'};
-if(player2 === "Brienne of Tarth")         {playerImage1.src = iconSrces + 'brienne-01.svg'};
+if(player2 === "Brienne of Tarth")    {playerImage2.src = iconSrces + 'brienne-01.svg'};
 
 
 
@@ -227,6 +227,11 @@ if(player2 === "Brienne of Tarth")         {playerImage1.src = iconSrces + 'brie
    const max = 6;
    let currentPlayerTurn = 0;
 
+   var currentPlayerColor = "#54CEC3";
+   var currentPlayerBackground = "white";
+   var currentPlayerBackground2 = "gray";
+   var trapDelay = 4000;
+
 
 
 
@@ -242,27 +247,116 @@ if(player2 === "Brienne of Tarth")         {playerImage1.src = iconSrces + 'brie
 
 
 
-   var page = document.getElementById('game');
-   var overlay = document.createElement('div');
-   var overlayP = document.createElement('p');
-   var overlayImg = document.createElement('img');
-   overlay.appendChild(overlayP);
-   overlay.appendChild(overlayImg);
-   container.appendChild(overlay);
-   overlay.classList.add("overlay");
 
-   overlay.style.display = 'none';
+
+
+
+
+
+
+
+
+
+
+
+   //lager elementene efor å legge inn i rollAgain();
+   //container ref Maincontainer og er definert lenge oppe
+   var diceSource = "assets/bilder/dice/";
+   var arrowImg = document.createElement('img');
+   arrowImg.classList.add('arrowImg');
+   container.appendChild(arrowImg);
+
+  // Dette er funskjonen for når spilleren får 6 og må rulle igjen
+   function rollAgain(column, row, image){
+     arrowImg.style.display = "block";
+     arrowImg.src = diceSource + image;
+     arrowImg.style.gridColumn = column;
+     arrowImg.style.gridRow = row;
+
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   //lager et overlay for traps
+   var page = document.getElementById('game'); // ref body
+     //lager parent div(img, p)
+     var overlay = document.createElement('div');
+     var overlayP = document.createElement('p');
+     var overlayImg = document.createElement('img');
+
+     overlay.appendChild(overlayP);
+     overlay.appendChild(overlayImg);
+     container.appendChild(overlay);
+     overlay.classList.add("overlay");
+     overlayP.classList.add("overlayP")
+     overlayImg.classList.add("overlayImg")
+     overlay.style.display = "none";
+     var overlayImg1 = document.querySelector(".overlayImg");
+
+
+    var imgPath1 = "assets/bilder/traps/ferdig/";
 
 
 
 
 
    // denne utføres når noen går på en felle
-   function showMessage(player, message, color){
+   function showMessage(player, message, color, marginP, img, imgMargin, imgWidth){
      overlay.style.display = 'block';
-     overlayP.innerHTML = player + message;
      overlay.style.backgroundColor  =   color;
+
+     overlayP.innerHTML = player + message;
+     overlayP.style.margin = marginP;
+
+     overlayImg1.src = imgPath1 + img;
+     overlayImg1.style.margin = imgMargin;
+     overlayImg.style.width = imgWidth;
    }
+
+
+
+
+
+
+
+   function showMessage2(player, message, color, marginP, img, imgMargin, imgWidth){
+     overlay.style.display = 'block';
+     overlay.style.backgroundColor  =   color;
+
+     overlayP.innerHTML = player + message;
+     overlayP.style.margin = marginP;
+
+     overlayImg1.src = imgPath1 + img;
+     overlayImg1.style.margin = imgMargin;
+     overlayImg.style.width = imgWidth;
+   }
+
+
+    /*function showMessage(player, message, color, margin, img, imgMargin, imgWidth)*/
+
+
+
+
 
 
 
@@ -270,7 +364,7 @@ if(player2 === "Brienne of Tarth")         {playerImage1.src = iconSrces + 'brie
 
    var displayDice = document.getElementById('displayDice'); // henter displaydice
    var diceImg = document.createElement('img');   //lager et img element
-   displayDice.appendChild(diceImg);   // setter img elementet til child av display childe
+   displayDice.appendChild(diceImg);   // setter img elementet til child av display child
 
 // player1 -------------------------------------
 function rollDice1(){
@@ -320,13 +414,15 @@ function rollDice1(){
       setTimeout(function(){
 
 
+
+
         // door trap
          if(player1verdi === 2){
-           showMessage(player1, " OPEN DOOR 7 steps forward ", "black");
+          showMessage(player1, "<br>found an <b> OPEN DOOR</b> <br> <b>7</b> steps forward ", "black", "50px 0 0  75px",  "pngdoor.png", "7px 25px 0 0", "120px");
 
            setTimeout(function(){
              overlay.style.display = 'none';
-           }, 3500)
+           }, trapDelay)
 
            player1verdi += 7;
 
@@ -334,11 +430,11 @@ function rollDice1(){
 
         // door trap 2
         if(player1verdi === 3){
-          showMessage(player1, " OPEN DOOR 6 steps forward ", "black");
+          showMessage(player1, "<br>found an <b> OPEN DOOR</b> <br> <b>7</b> steps forward ", "black", "50px 0 0  75px",  "pngdoor.png", "7px 25px 0 0", "120px");
 
           setTimeout(function(){
             overlay.style.display = 'none';
-          }, 3500)
+          }, trapDelay)
 
           player1verdi += 6;
 
@@ -348,42 +444,44 @@ function rollDice1(){
 
        //Lava trap
       if (player1verdi === 10){
-        showMessage(player1, " STEPPED IN LAVA, 9 BACK", "black");
+      showMessage(player1, " <br> <b>STEPPED IN LAVA,</b> <br> 9 Steps back", "black", "35px 0 0 75px", "pngfire.png", "25px 25px 200px 0", "200px");
 
         setTimeout(function(){
           overlay.style.display = 'none';
-        }, 3500)
+        }, trapDelay)
         player1verdi -= 9;
       }
 
 
+
+
       // Dragon trap
       if (player1verdi === 15){
-        showMessage(player1, " FUCK, A Dragon", "black");
+           showMessage(player1, " <br><b>Got Shot By Dragon</b> <br> 4 steps back", "black", "35px 10px 10px 75px", "pngdrage.png", "7px 10px 10px 10px", "200px");
 
         setTimeout(function(){
           overlay.style.display = 'none';
-        }, 3500)
+        }, trapDelay)
         player1verdi -= 4;
       }
 
 
       if (player1verdi === 22){
-        showMessage(player1, " ELSA IS ANGRY, MOVE AWAY", "black");
+        showMessage(player1, " <br> <b>MET AN ANGRY ELSA,</b><br> 9 steps back", "black", "35px 0 0 75px", "pngelsa.png", "10px 25px 0 0", "150px" );
 
         setTimeout(function(){
           overlay.style.display = 'none';
-        }, 3500)
+        }, trapDelay)
         player1verdi -= 9;
       }
 
 
       if (player1verdi === 28){
-        showMessage(player1, " LADDER YOUR WAY DOWN", "black");
+         showMessage(player1, " <br> <b> Got thrown over the edge</b> <br>24 steps back", "black", "35px 0 0 75px", "pngladder-01.png", "0 100px 0 0", "25px");
 
         setTimeout(function(){
           overlay.style.display = 'none';
-        }, 3500)
+        }, trapDelay)
         player1verdi -= 24;
       }
 
@@ -406,12 +504,19 @@ function rollDice1(){
        setTimeout(function(){
           if(rollp1 === 6){
              currentPlayerTurn--;
-             showMessage(player1, "rolled a 6, roll one more time", "black")
+
+              rollAgain('2/3', '2/3', '6-rollagain.svg'); // p1
+
              setTimeout(function(){
-               overlay.style.display = "none";
-             }, 2000)
+               arrowImg.style.display = "none";
+             }, 3000)
            }
         },700);
+
+
+        if(player1verdi > 29){
+          player1verdi = 29;
+        }
 
 
 
@@ -434,20 +539,27 @@ function rollDice1(){
      setTimeout(function(){
 
           if(currentPlayerTurn === 0){
-            dice2.style.backgroundColor = "grey";
-            dice1.style.backgroundColor = "green";
-            p2border.style.border = "5px solid gray";
-            p1border.style.border = "5px solid green";
+            dice2.style.backgroundColor = "gray";
+            p2border.style.border = "8px solid gray";
+            p2border.style.backgroundColor = currentPlayerBackground2;
+
+            dice1.style.backgroundColor = currentPlayerColor;
+            p1border.style.border = "8px solid " + currentPlayerColor;
+            p1border.style.backgroundColor = currentPlayerBackground;
           }
 
 
           if(currentPlayerTurn === 1){
-            dice2.style.backgroundColor = "green";
+            dice2.style.backgroundColor = currentPlayerColor;
+            p2border.style.border = "8px solid " + currentPlayerColor;
+            p2border.style.backgroundColor = currentPlayerBackground;
+
             dice1.style.backgroundColor = "gray";
-            p2border.style.border = "5px solid green";
-            p1border.style.border = "5px solid gray";
+            p1border.style.border = "8px solid gray";
+            p1border.style.backgroundColor = currentPlayerBackground2;
+
           }
-        }, 1200);
+        }, 1100);
 
 
 
@@ -531,53 +643,66 @@ function rollDice2(){
 
       /* traps (de må komme før man endrer verdien), muligens bruke switch for å gjøre det mer oversiktlig */
       setTimeout(function(){
-         if(player2verdi === 2){
-           showMessage(player2, " OPEN DOOR", "purple");
 
-           setTimeout(function(){
-             overlay.style.display = 'none';
-           }, 3500)
+        if(player2verdi === 2){
+         showMessage2(player2, "<br>found an <b> OPEN DOOR</b> <br> <b>7</b> steps forward ", "black", "50px 0 0  75px",  "pngdoor.png", "7px 25px 0 0", "120px");
 
-           player2verdi += 7;
+          setTimeout(function(){
+            overlay.style.display = 'none';
+          }, trapDelay)
 
-        }
+          player2verdi += 7;
+
+       }
+
+       // door trap 2
+       if(player2verdi === 3){
+           showMessage2(player2, "<br>found an <b> OPEN DOOR</b> <br> <b>7</b> steps forward ", "black", "50px 0 0  75px",  "pngdoor.png", "7px 25px 0 0", "120px");
+
+         setTimeout(function(){
+           overlay.style.display = 'none';
+         }, trapDelay)
+
+         player2verdi += 6;
+
+      }
 
 
       if (player2verdi === 10){
-        showMessage(player2, " CRAP LAVA", "purple");
+        showMessage2(player2, " <br> <b>STEPPED IN LAVA,</b> <br> 9 Steps back", "black", "35px 0 0 75px", "pngfire.png", "25px 25px 200px 0", "200px");
 
         setTimeout(function(){
           overlay.style.display = 'none';
-        }, 3500)
+        }, trapDelay)
         player2verdi -= 9;
       }
 
       if (player2verdi === 15){
-        showMessage(player2, " DRAGON", "purple");
+        showMessage2(player2, " <br><b>Got Shot By Dragon</b> <br> 4 steps back", "black", "35px 10px 10px 75px", "pngdrage.png", "7px 10px 10px 10px", "200px");
 
         setTimeout(function(){
           overlay.style.display = 'none';
-        }, 3500)
+        }, trapDelay)
         player2verdi -= 4;
       }
 
 
       if (player2verdi === 22){
-        showMessage(player2, " ELSA ANGRY", "purple");
+        showMessage2(player2, " <br> <b>MET AN ANGRY ELSA,</b><br> 9 steps back", "black", "35px 0 0 75px", "pngelsa.png", "10px 25px 0 0", "150px" );
 
         setTimeout(function(){
           overlay.style.display = 'none';
-        }, 3500)
+        }, trapDelay)
         player2verdi -= 9;
       }
 
 
       if (player2verdi === 28){
-        showMessage(player2, " DOWN THE LADDER", "purple");
+        showMessage2(player2, " <br> <b> Got thrown over the edge</b> <br>24 steps back", "black", "35px 0 0 75px", "pngladder-01.png", "0 100px 0 0", "25px");
 
         setTimeout(function(){
           overlay.style.display = 'none';
-        }, 3500)
+        }, trapDelay)
         player2verdi -= 24;
       }
 
@@ -592,14 +717,19 @@ function rollDice2(){
      setTimeout(function(){
         if(rollp2 === 6){
            currentPlayerTurn++;
-           showMessage(player2, "rolled a 6, roll one more time", "purple")
+             rollAgain('6/7', '2/3', '6-rollagain2.svg'); //  p2
 
            setTimeout(function(){
-             overlay.style.display = 'none';
-           }, 2000)
+             arrowImg.style.display = 'none';
+           }, 3000)
 
          }
       },700);
+
+
+      if(player2verdi > 29){
+        player2verdi = 29;
+      }
 
 
 
@@ -628,19 +758,25 @@ function rollDice2(){
 
        if(currentPlayerTurn === 0){
          dice2.style.backgroundColor = "gray";
-         dice1.style.backgroundColor = "green";
-         p2border.style.border = "5px solid gray";
-         p1border.style.border = "5px solid green";
+         p2border.style.border = "8px solid gray";
+         p2border.style.backgroundColor = currentPlayerBackground2;
+
+         dice1.style.backgroundColor = currentPlayerColor;
+         p1border.style.border = "8px solid " + currentPlayerColor;
+         p1border.style.backgroundColor = currentPlayerBackground;
        }
 
 
        if(currentPlayerTurn === 1){
-         dice2.style.backgroundColor = "green";
+         dice2.style.backgroundColor = currentPlayerColor;
+         p2border.style.border = "8px solid " + currentPlayerColor;
+         p2border.style.backgroundColor = currentPlayerBackground;
+
          dice1.style.backgroundColor = "gray";
-         p2border.style.border = "5px solid green";
-         p1border.style.border = "5px solid gray";
+         p1border.style.border = "8px solid gray";
+         p1border.style.backgroundColor = currentPlayerBackground2;
        }
-     }, 1300);
+     }, 1100);
 
 
 
@@ -662,37 +798,3 @@ function rollDice2(){
 
 
 }//closing player2 roll function
-
-
-
-
-
-
-
-
-
-
-
-
-/* for den under
-var tileWidth = 80;
-var tileHeight = 80;
-var tileCount = 0;
-*/
-
-
-/* ----- Original Tile drawing with for loop. going to do it with a background instead */
-/*
-// draw the tiles in a double for loop
-for (var column = 0; column <= 5; column++){
-  for(var row = 0; row <= 5; row++){
-    ctx.beginPath();
-    ctx.fillStyle = ["#eeeed2", "#630"][(column + row) % 2];
-    ctx.fillRect(row*tileWidth, column*tileHeight, tileWidth, tileHeight);
-    ctx.closePath();
-    ctx.fillStyle = "black";
-    ctx.font = "30px Arial";
-    ctx.fillText( tileCount - 5, row*tileWidth, column*tileHeight);
-    tileCount++;
-  }
-} */
