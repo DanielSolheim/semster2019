@@ -1,18 +1,16 @@
 
 
 
-//henter ut spillerene fra local storage
+//Fetching the players from local storage
 const playerKey1 = localStorage.key(0);
 const playerKey2 = localStorage.key(1);
 const player1 = localStorage.getItem(playerKey1);
 const player2 = localStorage.getItem(playerKey2);
-console.log(player1, player2);
 
 
 
 
-
-// initiater canvas
+// Getting canvas and rendering a context
 var myCanvas = document.getElementById('myCanvas');
 var ctx  = myCanvas.getContext('2d');
 
@@ -20,7 +18,7 @@ var ctx  = myCanvas.getContext('2d');
 
 
 
-// tegner opp posisjonene på brettet
+// Drawing and array of the positions on the board
 var drawnPositions = {
   positions:[
     //row 1
@@ -68,6 +66,8 @@ var drawnPositions = {
 
 }
 
+
+//Clear view of the positions with "console.table"
 console.table(drawnPositions.positions);
 
 
@@ -78,12 +78,7 @@ console.table(drawnPositions.positions);
 
 
 
-
-
-
-
-
-  //lager spillere og posisjoner
+  /*Making an object of the players, and giving them starting positions, we will also change these positions as we start the game functions */
   var myPlayer1  = {
     name: player1,
     positionX: 40,
@@ -103,31 +98,22 @@ console.table(drawnPositions.positions);
 
 
 
-// funksjoner for å tegne spillerne
+/* Drawing the players ------------------------------------ */
 
+
+
+//player1
+
+/* Need 2 functions to draw each player, because when we clear canvas and animate player1 for example, i had to redraw player2 without clearing the canvas */
 function p1CurrentPos(){
   ctx.beginPath();
   ctx.fillStyle = "black";
   ctx.arc(myPlayer1.positionX + 10, myPlayer1.positionY + 10, 20, 0, Math.PI * 2);
   ctx.fill();
-
   ctx.lineWidth = 7;
   ctx.strokeStyle = "orange";
   ctx.stroke();
-
 }
-
-function p2CurrentPos(){
-  ctx.beginPath();
-  ctx.fillStyle = "black";
-  ctx.arc(myPlayer2.positionX - 10, myPlayer2.positionY - 10, 20, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.lineWidth = 7;
-  ctx.strokeStyle = "purple";
-  ctx.stroke();
-}
-
 
 
 function drawPlayer1(){
@@ -136,14 +122,26 @@ function drawPlayer1(){
   ctx.fillStyle = "black";
   ctx.arc(myPlayer1.positionX + 10, myPlayer1.positionY + 10, 20, 0, Math.PI * 2);
   ctx.fill();
-
   ctx.lineWidth = 7;
   ctx.strokeStyle = "orange";
   ctx.stroke();
-
-
 }
 
+
+
+
+
+// player2
+
+function p2CurrentPos(){
+  ctx.beginPath();
+  ctx.fillStyle = "black";
+  ctx.arc(myPlayer2.positionX - 10, myPlayer2.positionY - 10, 20, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.lineWidth = 7;
+  ctx.strokeStyle = "purple";
+  ctx.stroke();
+}
 
 
 function drawPlayer2(){
@@ -152,24 +150,31 @@ function drawPlayer2(){
   ctx.fillStyle = "black";
   ctx.arc(myPlayer2.positionX - 10, myPlayer2.positionY - 10, 20, 0, Math.PI * 2);
   ctx.fill();
-
   ctx.lineWidth = 7;
   ctx.strokeStyle = "purple";
   ctx.stroke();
-
-
 }
 
 
+
+//drawing the players in their starting positions
 p1CurrentPos();
 p2CurrentPos();
 
 
 
 
+
+
+//just getting the main container
 var container = document.getElementById('mainContainer');
 
-//vi tegner spillerne på spillsiden;
+
+
+
+
+/*-------------- Drawing the player images on the game page ------------------*/
+//creating player img elements
 var player1Container = document.getElementById('player1Container');
 var playerImage1 = document.createElement('img');
 playerImage1.classList.add('playerImage1');
@@ -178,6 +183,8 @@ player1Container.appendChild(playerImage1);
 
 let iconSrces = 'assets/bilder/players/';
 
+
+/*defining the src of the image, determined by wich name the player has from local storage */
 if (player1 === 'Eddard Stark')       {playerImage1.src = iconSrces + 'player6-01.svg';  };
 if (player1 === "Daenerys Targaryen") {playerImage1.src = iconSrces + 'player7-01.svg';  };
 if (player1 === "Jon Snow")           {playerImage1.src = iconSrces + 'snow3-01.svg';  };
@@ -192,6 +199,7 @@ if(player1 === "Brienne of Tarth")         {playerImage1.src = iconSrces + 'brie
 
 
 
+//Do the same for player2 as we did above
 var player2Container = document.getElementById('player2Container');
 var playerImage2 = document.createElement('img');
 playerImage2.classList.add('playerImage2');
@@ -220,60 +228,46 @@ if(player2 === "Brienne of Tarth")    {playerImage2.src = iconSrces + 'brienne-0
 
 
 
-// rulle terninger funksjoner player1 and player2
+/* -------------------- Setting up function for the gameplay and interactive stuff ------------------*/
 
+
+//setting variables
    var player2verdi = 0;
    var player1verdi = 0;
-   const max = 6;
    let currentPlayerTurn = 0;
 
+
+
+
+   //changing the colors of the currentPLayer
    var currentPlayerColor = "#54CEC3";
    var currentPlayerBackground = "white";
    var currentPlayerBackground2 = "gray";
+   var p1border = document.getElementById('player1Container');
+   var p2border = document.getElementById('player2Container');
+   //Getting dice button, for the color change
+   var dice1 = document.getElementById('rollDice');
+   var dice2 = document.getElementById('rollDice2');
+
+
+
+   //setTimeout for the traps
    var trapDelay = 4000;
 
 
 
-
-
-
-   var dice1 = document.getElementById('rollDice');
-   var dice2 = document.getElementById('rollDice2');
-   var p1border = document.getElementById('player1Container');
-   var p2border = document.getElementById('player2Container');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   //lager elementene efor å legge inn i rollAgain();
-   //container ref Maincontainer og er definert lenge oppe
+   //Making Img element for rollAgain();
    var diceSource = "assets/bilder/dice/";
    var arrowImg = document.createElement('img');
    arrowImg.classList.add('arrowImg');
-   container.appendChild(arrowImg);
+   container.appendChild(arrowImg); /* container ref -> mainContainer */
 
-  // Dette er funskjonen for når spilleren får 6 og må rulle igjen
+  // 6, roll again function
    function rollAgain(column, row, image){
      arrowImg.style.display = "block";
      arrowImg.src = diceSource + image;
      arrowImg.style.gridColumn = column;
      arrowImg.style.gridRow = row;
-
-
    }
 
 
@@ -281,24 +275,8 @@ if(player2 === "Brienne of Tarth")    {playerImage2.src = iconSrces + 'brienne-0
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   //lager et overlay for traps
-   var page = document.getElementById('game'); // ref body
+      //Making the framwork for traps and the messages
+     var page = document.getElementById('game'); // ref body
      //lager parent div(img, p)
      var overlay = document.createElement('div');
      var overlayP = document.createElement('p');
@@ -318,9 +296,7 @@ if(player2 === "Brienne of Tarth")    {playerImage2.src = iconSrces + 'brienne-0
 
 
 
-
-
-   // denne utføres når noen går på en felle
+   /*The function that  shows a message when a player hits a trap, alot of params because of small differences in text,src, and images */
    function showMessage(player, message, color, marginP, img, imgMargin, imgWidth){
      overlay.style.display = 'block';
      overlay.style.backgroundColor  =   color;
@@ -337,7 +313,7 @@ if(player2 === "Brienne of Tarth")    {playerImage2.src = iconSrces + 'brienne-0
 
 
 
-
+   /*made one for each player beacause of some of the traps making problems when the same function was called twice withing a certain timeframe */
 
    function showMessage2(player, message, color, marginP, img, imgMargin, imgWidth){
      overlay.style.display = 'block';
@@ -352,24 +328,33 @@ if(player2 === "Brienne of Tarth")    {playerImage2.src = iconSrces + 'brienne-0
    }
 
 
-    /*function showMessage(player, message, color, margin, img, imgMargin, imgWidth)*/
 
 
-
-
-
-
-
-
-
+   //linked to the dice
+   const max = 6;
    var displayDice = document.getElementById('displayDice'); // henter displaydice
    var diceImg = document.createElement('img');   //lager et img element
    displayDice.appendChild(diceImg);   // setter img elementet til child av display child
+
+
+
+
+
+
+
+
+
+
+/* -------------- game functionalities start here ------------------------*/
+
 
 // player1 -------------------------------------
 function rollDice1(){
 
 
+
+
+    /* checking whos turn it is, and returning an error if the players is not allowed to roll */
     if(currentPlayerTurn === 1){
       var alertError = alert("nope you cant");
       return alertError;
@@ -377,21 +362,15 @@ function rollDice1(){
 
 
 
-
-
-      //Terningen
+      //Making a variable for the dice
       var rollp1 = Math.ceil(Math.random() * max);
 
-      // øker spillerverdi like mye som terningen
+
+      /*increasing the player value according to the rollp1 value*/
       player1verdi = player1verdi + rollp1;
 
 
-
-
-
-       ////////////////////////Lager terning animasjon
-
-
+      /* making dice animation , switching out images with a timeout*/
        displayDice.removeChild(diceImg);
        var diceImage = document.createElement('img');
        displayDice.appendChild(diceImg);
@@ -410,11 +389,8 @@ function rollDice1(){
 
 
 
-      /* traps (de må komme før man endrer verdien), muligens bruke switch for å gjøre det mer oversiktlig */
+      /* ----------------------------- Traps for player1  ---------------------------*/
       setTimeout(function(){
-
-
-
 
         // door trap
          if(player1verdi === 2){
@@ -425,8 +401,9 @@ function rollDice1(){
            }, trapDelay)
 
            player1verdi += 7;
-
         }
+
+
 
         // door trap 2
         if(player1verdi === 3){
@@ -437,7 +414,6 @@ function rollDice1(){
           }, trapDelay)
 
           player1verdi += 6;
-
        }
 
 
@@ -490,7 +466,7 @@ function rollDice1(){
 
 
 
-
+       /*increasing the currentPlayerTurn, player1 = 0; player2 = 1 */
        currentPlayerTurn++;
 
 
@@ -500,20 +476,21 @@ function rollDice1(){
 
 
 
-       // Hvis 6 rull igjen
+       // 6 roll again
        setTimeout(function(){
           if(rollp1 === 6){
              currentPlayerTurn--;
 
               rollAgain('2/3', '2/3', '6-rollagain.svg'); // p1
 
-             setTimeout(function(){
-               arrowImg.style.display = "none";
-             }, 3000)
+              setTimeout(function(){
+                arrowImg.style.display = "none";
+              }, 3000);
            }
+
         },700);
 
-
+        /*if player value goes beyod the map > 29, place it on the the finish tile */
         if(player1verdi > 29){
           player1verdi = 29;
         }
@@ -526,7 +503,7 @@ function rollDice1(){
 
 
 
-          /* endrer posisjonen til player 1 if forhold til drawPositions listen og verdien av player1. player1verdi følger indexen til drawPositions*/
+          /* changing the value of player1 positionX/Y accoring to player1Verdi and taking the values from the drawnPositions array*/
           setTimeout(function(){
           myPlayer1.positionX = drawnPositions.positions[player1verdi].x;
           myPlayer1.positionY = drawnPositions.positions[player1verdi].y;
@@ -535,7 +512,7 @@ function rollDice1(){
 
 
 
-      // bytter bakgrunn på terning, for å vise hvem som kan rulle
+      /*changing the background/border/button color of the players, according to currentPlayerTurn */
      setTimeout(function(){
 
           if(currentPlayerTurn === 0){
@@ -564,6 +541,8 @@ function rollDice1(){
 
 
 
+
+  /*showing the score of each player under the dice */
    var showScore1 = document.getElementById('showScore1');
 
    setTimeout(function(){
@@ -574,7 +553,7 @@ function rollDice1(){
 
 
 
-// requester animasjon av brikkene etter en hvis tid etter terningrull
+/* and finally, drawPLayer1 in new positon and draw player2 in current posiiton */
 setTimeout(function(){
 
    window.requestAnimationFrame(drawPlayer1);
@@ -585,7 +564,7 @@ setTimeout(function(){
 
 
 
-}//ender player 1
+}//ending player1
 
 
 
@@ -600,7 +579,10 @@ setTimeout(function(){
 
 
 
-////////////////////////Lager terning animasjon
+
+
+
+ //linked to the dice
 var displayDice2 = document.getElementById('displayDice2');
 var diceImg2 = document.createElement('img');
 displayDice2.appendChild(diceImg2);
@@ -613,16 +595,21 @@ displayDice2.appendChild(diceImg2);
 function rollDice2(){
 
 
+  /* checking whos turn it is, and returning an error if the players is not allowed to roll */
   if(currentPlayerTurn === 0){
     var alertError = alert("nope you cant");
     return alertError;
   }
 
 
+ //Making a variable for the dice
   var rollp2 = Math.ceil(Math.random() * max);
+  /*increasing the player value according to the rollp1 value*/
   player2verdi = player2verdi + rollp2;
 
 
+
+ /* making dice animation , switching out images with a timeout*/
   displayDice2.removeChild(diceImg2);
   diceImg2 = document.createElement('img');
   displayDice2.appendChild(diceImg2);
@@ -641,9 +628,18 @@ function rollDice2(){
       }
 
 
-      /* traps (de må komme før man endrer verdien), muligens bruke switch for å gjøre det mer oversiktlig */
+
+
+
+
+
+      /* ----------------------------- Traps for player2  ---------------------------*/
+
       setTimeout(function(){
 
+
+
+        //door trap
         if(player2verdi === 2){
          showMessage2(player2, "<br>found an <b> OPEN DOOR</b> <br> <b>7</b> steps forward ", "black", "50px 0 0  75px",  "pngdoor.png", "7px 25px 0 0", "120px");
 
@@ -652,68 +648,78 @@ function rollDice2(){
           }, trapDelay)
 
           player2verdi += 7;
-
        }
+
+
 
        // door trap 2
        if(player2verdi === 3){
            showMessage2(player2, "<br>found an <b> OPEN DOOR</b> <br> <b>7</b> steps forward ", "black", "50px 0 0  75px",  "pngdoor.png", "7px 25px 0 0", "120px");
 
-         setTimeout(function(){
-           overlay.style.display = 'none';
-         }, trapDelay)
+           setTimeout(function(){
+             overlay.style.display = 'none';
+           }, trapDelay)
 
          player2verdi += 6;
-
       }
 
-
+      // lava trap
       if (player2verdi === 10){
-        showMessage2(player2, " <br> <b>STEPPED IN LAVA,</b> <br> 9 Steps back", "black", "35px 0 0 75px", "pngfire.png", "25px 25px 200px 0", "200px");
+          showMessage2(player2, " <br> <b>STEPPED IN LAVA,</b> <br> 9 Steps back", "black", "35px 0 0 75px", "pngfire.png", "25px 25px 200px 0", "200px");
 
-        setTimeout(function(){
-          overlay.style.display = 'none';
-        }, trapDelay)
+          setTimeout(function(){
+            overlay.style.display = 'none';
+          }, trapDelay)
+
         player2verdi -= 9;
       }
 
+
+
+      // Dragon Trap
       if (player2verdi === 15){
         showMessage2(player2, " <br><b>Got Shot By Dragon</b> <br> 4 steps back", "black", "35px 10px 10px 75px", "pngdrage.png", "7px 10px 10px 10px", "200px");
 
         setTimeout(function(){
           overlay.style.display = 'none';
         }, trapDelay)
+
         player2verdi -= 4;
       }
 
 
+      //Elsa Trap
       if (player2verdi === 22){
         showMessage2(player2, " <br> <b>MET AN ANGRY ELSA,</b><br> 9 steps back", "black", "35px 0 0 75px", "pngelsa.png", "10px 25px 0 0", "150px" );
 
         setTimeout(function(){
           overlay.style.display = 'none';
         }, trapDelay)
+
         player2verdi -= 9;
       }
 
-
+      // Ladder trap
       if (player2verdi === 28){
         showMessage2(player2, " <br> <b> Got thrown over the edge</b> <br>24 steps back", "black", "35px 0 0 75px", "pngladder-01.png", "0 100px 0 0", "25px");
 
         setTimeout(function(){
           overlay.style.display = 'none';
         }, trapDelay)
+
         player2verdi -= 24;
       }
 
     }, 600)
 
+
+     /*decreasing the currentPlayerTurn, player1 = 0; player2 = 1 */
      currentPlayerTurn--;
 
 
 
 
-     // hvis spilleren får 6
+     // 6 roll again
      setTimeout(function(){
         if(rollp2 === 6){
            currentPlayerTurn++;
@@ -726,7 +732,7 @@ function rollDice2(){
          }
       },700);
 
-
+      /*if player value goes beyod the map > 29, place it on the the finish tile */
       if(player2verdi > 29){
         player2verdi = 29;
       }
@@ -734,7 +740,7 @@ function rollDice2(){
 
 
 
-  /* endrer posisjonen til player 2 if forhold til drawPositions listen og verdien av player1. player1verdi følger indexen til drawPositions*/
+   /* changing the value of player1 positionX/Y accoring to player1Verdi and taking the values from the drawnPositions array*/
   setTimeout(function(){
 
     myPlayer2.positionX = drawnPositions.positions[player2verdi].x;
@@ -745,15 +751,7 @@ function rollDice2(){
 
 
 
-
-
-
-
-
-
-
-
-
+  /*changing the background/border/button color of the players, according to currentPlayerTurn */
   setTimeout(function(){
 
        if(currentPlayerTurn === 0){
@@ -780,13 +778,17 @@ function rollDice2(){
 
 
 
-     var showScore2 = document.getElementById('showScore2');
 
-     setTimeout(function(){
-     showScore2.innerHTML = player2verdi;
+     /*showing the score of each player under the dice */
+                  var showScore2 = document.getElementById('showScore2');
 
-  },1100)
+                  setTimeout(function(){
+                        showScore2.innerHTML = player2verdi;
+                  },1100)
 
+
+
+    /* and finally, drawPLayer1 in new positon and draw player2 in current posiiton */
     setTimeout(function(){
       window.requestAnimationFrame(drawPlayer2);
       window.requestAnimationFrame(p1CurrentPos);
