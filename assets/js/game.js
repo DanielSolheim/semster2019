@@ -232,6 +232,20 @@ if(player2 === "Brienne of Tarth")    {playerImage2.src = iconSrces + 'brienne-0
 
 
 //setting variables
+
+
+//winner overlay variables
+var winnerOverlay = document.getElementById('gameWinner');
+console.log(winnerOverlay)
+
+var winnerName = document.getElementById('winnerName');
+var winnerPlayerImage = document.getElementById('winnerPlayerImage');
+
+
+
+  var toWinnerPage = document.getElementById('toWinnerPage');
+
+// player  values
    var player2verdi = 0;
    var player1verdi = 0;
    let currentPlayerTurn = 0;
@@ -337,6 +351,23 @@ if(player2 === "Brienne of Tarth")    {playerImage2.src = iconSrces + 'brienne-0
    displayDice.appendChild(diceImg);   // setter img elementet til child av display child
 
 
+
+   toWinnerPage.addEventListener('click', function(){
+    winnerOverlay.style.display = 'block';
+     winnerName.innerHTML = player1;
+    if (player1 === 'Eddard Stark')       {winnerPlayerImage.src = iconSrces + 'player6-01.svg';  };
+    if (player1 === "Daenerys Targaryen") {winnerPlayerImage.src = iconSrces + 'player7-01.svg';  };
+    if (player1 === "Jon Snow")           {winnerPlayerImage.src = iconSrces + 'snow3-01.svg';  };
+    if (player1 === "Tyrion Lannister")   {winnerPlayerImage.src = iconSrces + 'tyrion-01.svg';  };
+    if (player1 === "Tormund")            {winnerPlayerImage.src = iconSrces + 'tormund-01.svg';  };
+    if (player1 === "Joffrey Baratheon")  {winnerPlayerImage.src = iconSrces + 'joffrey-01.svg';  };
+    if (player1 === "Arya Stark")         {winnerPlayerImage.src = iconSrces + 'arya-01.svg';  };
+    if (player1 === "Margaery Tyrell")    {winnerPlayerImage.src = iconSrces + 'mary2-01.svg';  };
+    if (player1 === "Ramsay Snow")        {winnerPlayerImage.src = iconSrces + 'ramsay2-01.svg'};
+    if (player1 === "Brienne of Tarth")   {winnerPlayerImage.src = iconSrces + 'brienne-01.svg'};
+
+
+   })
 
 
 
@@ -560,6 +591,32 @@ setTimeout(function(){
    window.requestAnimationFrame(p2CurrentPos);
 
  }, 1100);
+
+
+
+setTimeout(function(){
+ if(player1verdi >= 29){
+   winnerOverlay.style.display = 'block';
+   winnerName.innerHTML = player1;
+
+
+
+
+   if (player1 === 'Eddard Stark')       {winnerPlayerImage.src = iconSrces + 'player6-01.svg';  };
+   if (player1 === "Daenerys Targaryen") {winnerPlayerImage.src = iconSrces + 'player7-01.svg';  };
+   if (player1 === "Jon Snow")           {winnerPlayerImage.src = iconSrces + 'snow3-01.svg';  };
+   if (player1 === "Tyrion Lannister")   {winnerPlayerImage.src = iconSrces + 'tyrion-01.svg';  };
+   if (player1 === "Tormund")            {winnerPlayerImage.src = iconSrces + 'tormund-01.svg';  };
+   if (player1 === "Joffrey Baratheon")  {winnerPlayerImage.src = iconSrces + 'joffrey-01.svg';  };
+   if (player1 === "Arya Stark")         {winnerPlayerImage.src = iconSrces + 'arya-01.svg';  };
+   if (player1 === "Margaery Tyrell")    {winnerPlayerImage.src = iconSrces + 'mary2-01.svg';  };
+   if(player1 === "Ramsay Snow")         {winnerPlayerImage.src = iconSrces + 'ramsay2-01.svg'};
+   if(player1 === "Brienne of Tarth")    {winnerPlayerImage.src = iconSrces + 'brienne-01.svg'};
+
+ }
+
+
+},3500);
 
 
 
@@ -797,6 +854,29 @@ function rollDice2(){
     }, 1000)
 
 
+    setTimeout(function(){
+     if(player2verdi >= 29){
+       winnerOverlay.style.display = 'block';
+       winnerName.innerHTML = player2;
+
+
+
+
+       if (player2 === 'Eddard Stark')       {winnerPlayerImage.src = iconSrces + 'player6-01.svg';  };
+       if (player2 === "Daenerys Targaryen") {winnerPlayerImage.src = iconSrces + 'player7-01.svg';  };
+       if (player2 === "Jon Snow")           {winnerPlayerImage.src = iconSrces + 'snow3-01.svg';  };
+       if (player2 === "Tyrion Lannister")   {winnerPlayerImage.src = iconSrces + 'tyrion-01.svg';  };
+       if (player2 === "Tormund")            {winnerPlayerImage.src = iconSrces + 'tormund-01.svg';  };
+       if (player2 === "Joffrey Baratheon")  {winnerPlayerImage.src = iconSrces + 'joffrey-01.svg';  };
+       if (player2 === "Arya Stark")         {winnerPlayerImage.src = iconSrces + 'arya-01.svg';  };
+       if (player2 === "Margaery Tyrell")    {winnerPlayerImage.src = iconSrces + 'mary2-01.svg';  };
+       if (player2 === "Ramsay Snow")         {winnerPlayerImage.src = iconSrces + 'ramsay2-01.svg'};
+       if (player2 === "Brienne of Tarth")    {winnerPlayerImage.src = iconSrces + 'brienne-01.svg'};
+
+     }
+
+
+   },3500);
 
 
 }//closing player2 roll function

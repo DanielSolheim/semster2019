@@ -23,6 +23,7 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: 80%;
   margin: 0 auto;
+  margin-bottom: 100px;
 }
 #cards .card {
   width: 80%;
@@ -266,14 +267,30 @@ body {
   background-color: black;
 }
 
+#toWinnerPage {
+  width: 300px;
+  margin: 0 auto;
+  cursor: pointer;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+#toWinnerPage p {
+  padding: 10px 0;
+  font-size: 20px;
+}
+
 #gameWinner {
+  display: none;
   background-color: black;
   width: 100%;
   height: 100vh;
-  opacity: 0.97;
+  opacity: 1;
   overflow-y: hidden;
+  overflow-x: hidden;
   position: absolute;
   top: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 #winnerCanvas {
@@ -281,20 +298,62 @@ body {
   background-size: cover;
 }
 
-.try {
-  width: 100%;
-  background-color: red;
-  height: 200px;
-  z-index: 3;
-  position: absolute;
-  opacity: 1;
-  top: 100px;
-}
-
 .winningGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  width: 50%;
+  margin-left: 25%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto 40px;
+  position: absolute;
+  top: 100px;
+  z-index: 3;
+}
+.winningGrid h1 {
+  grid-column: 1/6;
+  grid-row: 1/2;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+.winningGrid a {
+  grid-column: 1/6;
+  grid-row: 4/5;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+}
+.winningGrid a:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.winnerImg {
+  grid-column: 2/5;
+  grid-row: 2/3;
+  display: grid;
+  grid-template-columns: 1fr 1.7fr 1fr;
+  grid-template-rows: 0.5fr 1.7fr 1fr;
+}
+.winnerImg img {
+  grid-column: 1/4;
+  grid-row: 1/4;
+  width: 60%;
+  margin-left: 20%;
+}
+.winnerImg .displayWinner {
+  grid-row: 2/3;
+  grid-column: 2/3;
+  background-color: white;
+  width: 100%;
+  border-radius: 200px;
+  height: 100%;
+}
+.winnerImg .displayWinner img {
+  width: 70%;
+  margin-right: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -142,22 +142,15 @@
 }
 
 .overlayImg {
-
   z-index: 3;
   width: 100px;
-
-
   float: right;
-
 }
 
 .overlayP {
-
   font-size: 20px;
   float:left;
-
   font-family: $main-font;
-
 }
 
 @keyframes fadeIn{
@@ -223,5 +216,18 @@
     border: 7px solid purple;
     background-color: black;
 
+  }
+}
+
+#toWinnerPage {
+  width: 300px;
+  margin: 0 auto;
+  cursor: pointer;
+  text-align: center;
+  background-color: black;
+  color: white;
+  p {
+    padding: 10px  0;
+    font-size: 20px;
   }
 }

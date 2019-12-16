@@ -71,7 +71,7 @@ card.appendChild(familyicon);
 	if (result.name === "Arya Stark")         {familyicon.src = iconSrc + 'arya-01.svg';  };
 	if (result.name === "Margaery Tyrell")    {familyicon.src = iconSrc + 'mary2-01.svg';  };
 	if (result.name === "Ramsay Snow")        {familyicon.src = iconSrc + 'ramsay2-01.svg';  };
-	if (result.name === "Brienne of Tarth")        {familyicon.src = iconSrc + 'brienne-01.svg';  };
+	if (result.name === "Brienne of Tarth")   {familyicon.src = iconSrc + 'brienne-01.svg';  };
 
 
 
@@ -81,7 +81,7 @@ card.appendChild(familyicon);
 
 
 
-/*adding an eventlistener, add the names of characters clicked to local storage */
+/*adding an eventlistener, add the names of characters clicked to local storage, and add a banner to player1 and player2 */
 	card.addEventListener('click', function(){
 
 		// if both alreadt are store, clear storage and start adding again
